@@ -560,7 +560,13 @@ ol {
 	-o-transition: all, 0.9s;
 	transition: all, 0.9s;
 }
-
+.add_to_card_btn{
+	background-color: rgb(238, 238, 238);
+	border:0px solid  ;
+	padding:6px 10px !important;
+	font-size:14px !important;
+	border-radius:5px;
+}
 .hero__text .primary-btn {
 	position: relative;
 	top: 100px;
@@ -3781,3 +3787,35 @@ ol {
 		height: 250px;
 	}
 }
+
+
+/*  ================ ON HOVER IMAGE CODE START =========== */
+.image-hover-box {
+  position: relative;
+  /* width: 100%; */
+  overflow: hidden;
+background-size: cover !important;
+}
+
+.image-hover-box img {
+  width: 100%;
+  display: block;background-size: cover !important;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.image-hover-box .img-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.image-hover-box:hover .img-hover {
+  opacity: 1;
+}
+
+.image-hover-box:hover .img-main {
+  opacity: 0;
+}
+
+/* ================= ON HOVER IMAGE COEE END =================== */
