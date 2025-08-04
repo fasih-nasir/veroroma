@@ -91,3 +91,24 @@ if (prodcut_of_home_page) {
   fetchProducts();
 }
 // =========== FETCH PRODUCT IS HOME PAGE END ===============
+
+
+// =================== CATEGOREIS.HTML CODE START ============================
+
+// =================== CATEGOREIS.HTML CODE END ============================
+var nav_link_categories = document.getElementById("nav_link_categories");
+if (nav_link_categories) {
+    async function fetch_option() {
+      const categorySnapshot = await getDocs(collection(db, "categories"));
+      
+      categorySnapshot.forEach((doc) => {
+        nav_link_categories.innerHTML += `
+        <li><a class="dropdown-item" href="categories.html?${doc.data().name}">${doc.data().name}</a></li>
+        `;
+      });
+    }
+    
+  setTimeout(() => {
+       fetch_option();
+  }, 100);
+  }
