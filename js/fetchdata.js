@@ -119,12 +119,13 @@ var location_of_page=window.location.href.split("=")
 var product__filte_of_car_page=document.getElementById("product__filte_of_car_page")
 if(location.pathname === "/categories.html" && product__filte_of_car_page){
 
+     document.getElementById("category_name_of_page").innerHTML=location_of_page[1];
 
         const prodcSnapshot = await getDocs(collection(db, "products"));
         prodcSnapshot.forEach((e,index)=>{
          
           if(e.data().category.toLowerCase() === location_of_page[1]){
-      
+ 
             product__filte_of_car_page.innerHTML+=`
              <div  class="col-lg-4 mb-2  col-12  m-0 p-0 w-100">
                         <div class="m-0 p-0 col-12">
@@ -148,6 +149,7 @@ if(location.pathname === "/categories.html" && product__filte_of_car_page){
             `
             
           }
+         
           
         })
 }

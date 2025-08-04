@@ -3604,9 +3604,9 @@ background-size: cover !important;
 .bg_light{
 	background-color: rgb(236, 236, 236) !important;
 }
-/* .banners_pages{
-	height: 250px !important;
-} */
+.banners_pages{
+	height: 280px !important;
+}
 .image-hover-box:hover .img-hover {
   opacity: 1;
 }
