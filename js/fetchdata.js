@@ -33,7 +33,7 @@ if (categories_product) {
 
           return `
         <div class="col-6 col-md-4 col-lg-2">
-          <a href="categories.html?${data.name}" class="text-decoration-none text-dark">
+          <a href="categories.html?=${data.name.toLowerCase()}" class="text-decoration-none text-dark">
             <img src="${data.imgUrl}" class="img-fluid rounded" alt="${data.name}">
             <h6 class="mt-2">${data.name}</h6>
           </a>
