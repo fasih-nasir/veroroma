@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Category</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+  <style>
+    body { font-family: Arial; margin: 2rem; background: #f9f9f9; }
+    form { background: white; padding: 20px; max-width: 400px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px; }
+    input, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+    button { background: #007bff; color: white; border: none; cursor: pointer; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">Add Category</h2>
+
+  <form id="categoryForm">
+    <input type="text" id="imgUrl" placeholder="Image URL" required>
+    <input type="text" id="categoryName" placeholder="Category Name" required>
+    <input type="text" id="categoryId" placeholder="Category ID" required>
+    <button type="submit">Add Category</button>
+  </form>
+
+  <script type="module">
+    console.log(new Date());
+    
+    // Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC1zoSG4uMziRnA1Iaiz5r-9UBbHwJTRD8",
+      authDomain: "veroroma-1a37b.firebaseapp.com",
+      projectId: "veroroma-1a37b",
+      storageBucket: "veroroma-1a37b.appspot.com",
+      messagingSenderId: "738682652885",
+      appId: "1:738682652885:web:7dabde8d7285773e757a5c",
+      measurementId: "G-LVGP1FPRMQ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.getElementById('categoryForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const imgUrl = document.getElementById('imgUrl').value.trim();
+      const name = document.getElementById('categoryName').value.trim();
+      const categoryId = document.getElementById('categoryId').value.trim();
+
+      try {
+        await addDoc(collection(db, "categories"), {
+          imgUrl,
+          name,
+          categoryId,
+          add_time : new Date()
+        });
+
+        alert("✅ Category added successfully!");
+        e.target.reset();
+      } catch (error) {
+        alert("❌ Error: " + error.message);
+      }
+    });
+  </script>
+
+</body>
+</html>

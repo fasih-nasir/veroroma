@@ -16,7 +16,7 @@
           color: $heading-color;
           font-size: 16px;
           font-weight: 700;
-          text-transform: uppercase;
+          
           padding-bottom: 25px;
         }
       }
@@ -130,7 +130,7 @@
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 2px;
-    text-transform: uppercase;
+    
     border: 1px solid #e1e1e1;
     padding: 14px 35px;
     display: inline-block;
@@ -143,7 +143,7 @@
   h6 {
     color: $heading-color;
     font-weight: 700;
-    text-transform: uppercase;
+    
     margin-bottom: 35px;
   }
 
@@ -168,7 +168,7 @@
       color: $white-color;
       font-weight: 700;
       letter-spacing: 2px;
-      text-transform: uppercase;
+      
       background: $heading-color;
       padding: 0 30px;
       border: none;
@@ -186,7 +186,7 @@
 
   h6 {
     color: $heading-color;
-    text-transform: uppercase;
+    
     margin-bottom: 12px;
   }
 
