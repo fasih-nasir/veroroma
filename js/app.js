@@ -32,10 +32,10 @@ if (header) {
        const categorySnapshot = await getDocs(collection(db, "categories"));
        
        categorySnapshot.forEach((doc) => {
-        console.log(doc.data().name.toLowerCase());
+   
         
          nav_link_categories.innerHTML += `
-         <li><a class="dropdown-item" href="categories.html?${doc.data().name.toLowerCase()}">${doc.data().name}</a></li>
+         <li><a class="dropdown-item" href="categories.html?=${doc.data().name.toLowerCase()}">${doc.data().name}</a></li>
          `;
        });
      }

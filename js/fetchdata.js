@@ -103,7 +103,7 @@ if (nav_link_categories) {
       
       categorySnapshot.forEach((doc) => {
         nav_link_categories.innerHTML += `
-        <li><a class="dropdown-item" href="categories.html?${doc.data().name}">${doc.data().name}</a></li>
+        <li><a class="dropdown-item" href="categories.html?=${doc.data().name}">${doc.data().name}</a></li>
         `;
       });
     }
@@ -112,3 +112,44 @@ if (nav_link_categories) {
        fetch_option();
   }, 100);
   }
+
+
+/* =========== CATEOGORIES.HTML CODE START =================== */
+var location_of_page=window.location.href.split("=")
+var product__filte_of_car_page=document.getElementById("product__filte_of_car_page")
+if(location.pathname === "/categories.html" && product__filte_of_car_page){
+
+
+        const prodcSnapshot = await getDocs(collection(db, "products"));
+        prodcSnapshot.forEach((e,index)=>{
+         
+          if(e.data().category.toLowerCase() === location_of_page[1]){
+      
+            product__filte_of_car_page.innerHTML+=`
+             <div  class="col-lg-4 mb-2  col-12  m-0 p-0 w-100">
+                        <div class="m-0 p-0 col-12">
+                            <div class="image-hover-box">
+           <img src="${e.data().image1}" class="img-fluid col-12 mb-lg-3 shadow-sm img-main" alt="">
+           <img src="${e.data().image2}" class="img-fluid col-12 mb-lg-3 shadow-sm img-hover" alt="">
+                              
+                            </div>
+                            <div class="p-3 mt-lg-3">
+                                <h5>${e.data().name}</h5>
+                              <p>${e.data().category}</p>
+                              
+                       <div class="my-2 d-flex flex-row justify-content-between align-items-center">
+                                 <h6>${e.data().price}</h6>
+                                 <button id="addtocard" class="add_to_card_btn">Add to cart</button>
+                       </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+            `
+            
+          }
+          
+        })
+}
+
+/* =========== CATEOGORIES.HTML CODE END =================== */
