@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');:root{
-	--font-family-Cinzel: "Jost", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Nata+Sans:wght@100..900&display=swap');
+:root{
+	--font-family-Cinzel: "Nata Sans", sans-serif;;
 }
 html,
 body {
@@ -470,7 +471,11 @@ ol {
 .canvas__open {
 	display: none;
 }
-
+.div_blur_carosuek{
+	background-color: rgba(128, 128, 128, 0.062) !important;
+	backdrop-filter: blur(20px) !important;
+	padding:15px 10px !important;
+}
 /*---------------------
   Hero
 -----------------------*/

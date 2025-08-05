@@ -40,54 +40,73 @@
         <!-- Header Section End -->
 
         <!-- Hero Section Begin -->
-        <section class="hero">
-            <div class="hero__slider owl-carousel">
-                <div class="hero__items set-bg"
-                    data-setbg="img/hero/hero-1.jpg">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-5 col-lg-7 col-md-8">
-                           <div class="hero__text">
-  <h6 class="text-white">Elegant Jewelry</h6>
-  <h2 class="text-white">Timeless Bracelets & Accessories</h2>
-  <p class="text-white">
-    Discover handcrafted elegance with our exclusive range of earrings,
-    rings, bangles, and more. Perfect for every occasion.
-  </p>
-  <a href="#" class="primary-btn text-white">
-    Shop Now <span class="arrow_right"></span>
-  </a>
+     <!-- Bootstrap 5 Carousel Start -->
+<section class="hero">
+  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
 
-</div>
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="hero__items" style="background-image: url('img/hero/hero-1.jpg'); background-size: cover; background-position: center; height: 80vh;">
+          <div class="container-fluid d-flex align-items-lg-center justify-content-center ">
+          
+              <div class="col-lg-7 py-3 col-12 mx-auto text-center div_blur_carosuek">
+                <div class=" text-white">
+                  <h5 class="h4 mb-2 fw-normal">Elegant Jewelry</h5>
+                  <h2 class="h1 mb-2">Timeless Bracelets & Accessories</h2>
+                  <p class="fs-6 my-2 mb-2  mx-auto text-center fw-normal">
+                  Elevate your style with our timeless collection of handcrafted earrings, rings, bangles, and necklaces — designed to make every moment special.
 
-                            </div>
-                        </div>
-                    </div>
+Unveil your inner glow with pieces that speak elegance, tradition, and individuality — all lovingly crafted by skilled artisans.
+                  </p>
+                  <a href="shop.html" class="btn bg-white text-dark d-flex flex-row align-items-center col-lg-3 justify-content-between col-8 mx-auto">
+                    Shop Now <span class="arrow_right text-dark"></span>
+                  </a>
                 </div>
-                <div class="hero__items set-bg"
-                    data-setbg="img/hero/hero-2.jpg">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-5 col-lg-7 col-md-8">
-                             <div class="hero__text">
-  <h6 class="text-white">New Arrivals</h6>
-  <h2 class="text-white">Elegant Jewelry Collection 2025</h2>
-  <p class="text-white">
-    Explore timeless beauty with our handcrafted earrings, rings, bangles & bracelets —
-    designed to sparkle every moment of your life.
-  </p>
-  <a href="#" class="primary-btn text-white">
-    Shop Now <span class="arrow_right"></span>
-  </a>
+              </div>
+       
+          </div>
+        </div>
+      </div>
 
-</div>
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="hero__items" style="background-image: url('img/hero/hero-2.jpg'); background-size: cover; background-position: center; height: 80vh;">
+           <div class="container-fluid d-flex align-items-lg-center justify-content-center ">
+          
+              <div class="col-lg-7 py-3 col-12 mx-auto text-center div_blur_carosuek">
+                <div class=" text-white">
+                  <h5 class="h4 mb-2 fw-normal">Elegant Jewelry</h5>
+                  <h2 class="h1 mb-2">Timeless Bracelets & Accessories</h2>
+                  <p class="fs-6 my-2 mb-2  mx-auto text-center fw-normal">
+                  Elevate your style with our timeless collection of handcrafted earrings, rings, bangles, and necklaces — designed to make every moment special.
 
-                            </div>
-                        </div>
-                    </div>
+Unveil your inner glow with pieces that speak elegance, tradition, and individuality — all lovingly crafted by skilled artisans.
+                  </p>
+                  <a href="shop.html" class="btn bg-white text-dark d-flex flex-row align-items-center col-lg-3 justify-content-between col-8 mx-auto">
+                    Shop Now <span class="arrow_right text-dark"></span>
+                  </a>
                 </div>
-            </div>
-        </section>
+              </div>
+       
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</section>
+
+<!-- Bootstrap 5 Carousel End -->
+
         <!-- Hero Section End -->
 
         <!-- Banner Section Begin -->
@@ -222,7 +241,7 @@
     <div class="row text-center">
       <!-- Free Shipping -->
       <div class="col-md-6 col-lg-3 mb-4">
-        <div class="p-3 shadow-sm bg-white rounded h-100">
+        <div class="p-3 shadow-sm bg-white rounded">
           <img src="https://alukas.presslayouts.com/wp-content/uploads/2023/04/free-shipping.svg" alt="Free Shipping" class="mb-3" width="60">
           <h5 class="fw-bold">Free Shipping</h5>
           <p class="mb-0 text-muted">For all Orders Over $100</p>
@@ -336,15 +355,7 @@
         <!-- Footer Section End -->
 
         <!-- Search Begin -->
-        <div class="search-model">
-            <div class="h-100 d-flex align-items-center justify-content-center">
-                <div class="search-close-switch">+</div>
-                <form class="search-model-form">
-                    <input type="text" id="search-input"
-                        placeholder="Search here.....">
-                </form>
-            </div>
-        </div>
+        
         <!-- Search End -->
 
         <!-- Js Plugins --> <script
