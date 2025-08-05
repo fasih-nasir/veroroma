@@ -3,6 +3,8 @@ import {
   getFirestore,
   collection,
   addDoc,
+  doc,
+  getDoc ,
   getDocs,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -65,26 +67,35 @@ if (prodcut_of_home_page) {
 
       let count = 0;
       querySnapshot.forEach((doc) => {
-        if (count >= 8) return; // Stop after 8 products
+  
+        
+        if (count >= 8) return; 
 
         prodcut_of_home_page.innerHTML += `
-          <div class="col-lg-3 col-md-6 col-12 mix new-arrivals cards_of_home_categoreis">
-            <div class="product__item">
-              <div class="product__item__pic set-bg image-hover-box">
-                <img src="${doc.data().image1}" class="img-fluid shadow-sm img-main" alt="">
-                <img src="${doc.data().image2}" class="img-fluid shadow-sm img-hover" alt="">
-              </div>
-              <div class="product__item__tex mt-lg-1">
-              <p class="">${doc.data().category}</p>
-                <h6 class="fw-bold fs-6 ">${doc.data().name}</h6>
-                <div class="my-3 d-flex flex-row justify-content-between align-items-center">
-                  <h6>Rs : ${doc.data().price}</h6>
-                  <button class="add_to_card_btn bg text-white">Add to cart</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
+      <div class="col-lg-3 col-md-6 col-12 mix new-arrivals">
+  <div class="product__item cards_of_home_categoreis_new">
+    <div class="product__item__pic set-bg image-hover-box">
+      <img src="${doc.data().image1}" class="img-fluid img-main" alt="">
+      <img src="${doc.data().image2}" class="img-fluid img-hover" alt="">
+      <p class="position-absolute top-0 bg-white shadow m-2 px-2 rounded-2">
+        ${doc.data().category}
+      </p>
+    </div>
+    <div class="product__item__tex mt-lg-2 pt-1 bg-white p-2 rounded-3">
+      <h6 class="fw-normal fs-5">${doc.data().name}</h6>
+      <div class="my-3 d-flex flex-row justify-content-between align-items-center">
+        <h6>Rs : ${doc.data().price}</h6>
+        <button class="bg-white p-2 border-0 shadow px-1 rounded-2">
+          <a href="product_detail.html?=${doc.id}" class="text-decoration-none text-dark">See More</a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        `
+        ;
         count++;
       });
     } catch (error) {
@@ -130,6 +141,7 @@ if(location.pathname === "/categories.html" && product__filte_of_car_page){
         prodcSnapshot.forEach((e,index)=>{
          
           if(e.data().category.toLowerCase() === location_of_page[1]){
+
  
             product__filte_of_car_page.innerHTML+=`
              <div  class="col-lg-4 mb-2  col-12  m-0 p-0 w-100">
@@ -145,9 +157,14 @@ if(location.pathname === "/categories.html" && product__filte_of_car_page){
                               
                        <div class="my-2 d-flex flex-row justify-content-between align-items-center">
                                  <h6>${e.data().price}</h6>
-                                 <button id="addtocard" class="add_to_card_btn">Add to cart</button>
+                                      <button class="bg-white p-2  border-0 shadow px-5 rounded-2">
+  <a href="product_detail.html" class="text-decoration-none text-dark ">See More</a>
+</button>
                        </div>
-                              
+                       
+                              <div>
+                   
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -160,3 +177,100 @@ if(location.pathname === "/categories.html" && product__filte_of_car_page){
 }
 
 /* =========== CATEOGORIES.HTML CODE END =================== */
+
+
+
+
+
+var location_of_page = window.location.href.split("=");
+var single_prdocut_detail_heef = document.getElementById("single_prdocut_detail_heef");
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const location_of_page = window.location.href.split("=");
+  const single_prdocut_detail_heef = document.getElementById("single_prdocut_detail_heef");
+
+  if (location.pathname === "/product_detail.html" && single_prdocut_detail_heef) {
+    document.getElementById("product_name_of_single_page").innerText = location_of_page[1];
+
+    const prodcRef = doc(db, "products", location_of_page[1]);
+    const prodcSnapshot = await getDoc(prodcRef);
+
+    if (prodcSnapshot.exists()) {
+      const product = prodcSnapshot.data();
+
+      single_prdocut_detail_heef.innerHTML = `
+        <div class="col-lg-6">
+          <div class="col-12 d-flex justify-content-center align-items-center">
+            <img src="${product.image1}" class="img-fluid col-12 product_image_of_single_page_is_o" alt="${product.name}">
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div>
+            <h2 class="mb-2">${product.name}</h2>
+            <h5 class="mb-2">Rs ${product.price}</h5>
+            <p class="mb-2">${product.description}</p>
+            <p class="lh-sm">Available in stock: ${product.quantity}</p>
+            <p class="lh-sm">Category: ${product.category}</p>
+          </div>
+
+          <div class="d-flex flex-lg-row flex-column gap-3 align-items-center">
+            <button type="button" class="bg-white shadow-lg border-0 px-3 rounded-2 p-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Buy Now
+            </button>
+            <button class="border-dark border-1 shadow-lg px-3 rounded-2 p-2">Add To Cart</button>
+          </div>
+        </div>
+
+        <!-- Modal Code -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Complete Your Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="orderForm">
+                  <div class="mb-3">
+                    <label class="form-label">Your Name</label>
+                    <input type="text" class="form-control" id="buyerName" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="buyerPhone" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Quantity</label>
+                    <input type="number" class="form-control" id="buyerQty" min="1" value="1" required>
+                  </div>
+                  <button type="submit" class="btn btn-success w-100">Send via WhatsApp</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Attach WhatsApp redirect on form submit
+      setTimeout(() => {
+        const form = document.getElementById("orderForm");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name = document.getElementById("buyerName").value.trim();
+            const phone = document.getElementById("buyerPhone").value.trim();
+            const qty = document.getElementById("buyerQty").value;
+
+            const message = `*Order Details:*\nProduct: ${product.name}\nPrice: Rs ${product.price}\nQuantity: ${qty}\n\n*Customer Info:*\nName: ${name}\nPhone: ${phone}`;
+            const whatsappURL = `https://wa.me/923111082474?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+          });
+        }
+      }, 200);
+
+    } else {
+      console.log("❌ No such document!");
+    }
+  }
+});
