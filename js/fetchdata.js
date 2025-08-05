@@ -22,20 +22,25 @@ const db = getFirestore(app);
 // 4. Fetch data from "categories" collection
 
 var categories_product = document.getElementById("categories_product");
+
 if (categories_product) {
   async function fetchCategories() {
     try {
       const querySnapshot = await getDocs(collection(db, "categories"));
+      const allDocs = querySnapshot.docs;
 
-      const htmlContent = querySnapshot.docs
+      // Limit to 5 only if more than 5 exist
+      const limitedDocs = allDocs.length > 5 ? allDocs.slice(0, 5) : allDocs;
+
+      const htmlContent = limitedDocs
         .map((doc) => {
           const data = doc.data();
 
           return `
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-5 col-md-3 col-lg-2 cards_of_home_categoreis">
           <a href="categories.html?=${data.name.toLowerCase()}" class="text-decoration-none text-dark">
-            <img src="${data.imgUrl}" class="img-fluid rounded" alt="${data.name}">
-            <h6 class="mt-2">${data.name}</h6>
+            <img src="${data.imgUrl}" class="img-fluid rounded " alt="${data.name}">
+            <h6 class="mt-2 text-uppercase">${data.name}</h6>
           </a>
         </div>
       `;
@@ -48,7 +53,6 @@ if (categories_product) {
     }
   }
 
-  // 5. Call the function
   fetchCategories();
 }
 
@@ -58,30 +62,30 @@ if (prodcut_of_home_page) {
   async function fetchProducts() {
     try {
       const querySnapshot = await getDocs(collection(db, "products"));
+
+      let count = 0;
       querySnapshot.forEach((doc) => {
+        if (count >= 8) return; // Stop after 8 products
+
         prodcut_of_home_page.innerHTML += `
-              <div  class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 col-6 mix new-arrivals">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg image-hover-box">
-           <img src="${doc.data().image1}" class="img-fluid mb-lg-3 shadow-sm img-main" alt="">
-           <img src="${doc.data().image2}" class="img-fluid mb-lg-3 shadow-sm img-hover" alt="">
-                              
-                            </div>
-                            <div class="product__item__tex mt-lg-3">
-                                <h5>${doc.data().name}</h5>
-                              <p>${doc.data().category}</p>
-                              
-                       <div class="my-2 d-flex flex-row justify-content-between align-items-center">
-                                 <h6>${doc.data().price}</h6>
-                                 <button id="addtocard" class="add_to_card_btn">Add to cart</button>
-                       </div>
-                              
-                            </div>
-                        </div>
-                    </div>
-        
+          <div class="col-lg-3 col-md-6 col-12 mix new-arrivals cards_of_home_categoreis">
+            <div class="product__item">
+              <div class="product__item__pic set-bg image-hover-box">
+                <img src="${doc.data().image1}" class="img-fluid shadow-sm img-main" alt="">
+                <img src="${doc.data().image2}" class="img-fluid shadow-sm img-hover" alt="">
+              </div>
+              <div class="product__item__tex mt-lg-1">
+              <p class="">${doc.data().category}</p>
+                <h6 class="fw-bold fs-6 ">${doc.data().name}</h6>
+                <div class="my-3 d-flex flex-row justify-content-between align-items-center">
+                  <h6>Rs : ${doc.data().price}</h6>
+                  <button class="add_to_card_btn bg text-white">Add to cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
         `;
-        console.log("🛒 Product:", doc.data());
+        count++;
       });
     } catch (error) {
       console.error("❌ Error fetching products:", error);
@@ -90,6 +94,7 @@ if (prodcut_of_home_page) {
 
   fetchProducts();
 }
+
 // =========== FETCH PRODUCT IS HOME PAGE END ===============
 
 
