@@ -187,12 +187,13 @@ var single_prdocut_detail_heef = document.getElementById("single_prdocut_detail_
 
 document.addEventListener("DOMContentLoaded", async () => {
   const location_of_page = window.location.href.split("=");
+  const productId = location_of_page[1];
   const single_prdocut_detail_heef = document.getElementById("single_prdocut_detail_heef");
 
   if (location.pathname === "/product_detail.html" && single_prdocut_detail_heef) {
-    document.getElementById("product_name_of_single_page").innerText = location_of_page[1];
+    document.getElementById("product_name_of_single_page").innerText = productId;
 
-    const prodcRef = doc(db, "products", location_of_page[1]);
+    const prodcRef = doc(db, "products", productId);
     const prodcSnapshot = await getDoc(prodcRef);
 
     if (prodcSnapshot.exists()) {
@@ -258,13 +259,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (form) {
           form.addEventListener("submit", function (e) {
             e.preventDefault();
+
             const name = document.getElementById("buyerName").value.trim();
             const phone = document.getElementById("buyerPhone").value.trim();
             const qty = document.getElementById("buyerQty").value;
 
-            const message = `*Order Details:*\nProduct: ${product.name}\nPrice: Rs ${product.price}\nQuantity: ${qty}\n\n*Customer Info:*\nName: ${name}\nPhone: ${phone}`;
+            const message = `*Order Details:*
+Product: ${product.name}
+Product ID: ${productId}
+Price: Rs ${product.price}
+Quantity: ${qty}
+
+*Customer Info:*
+Name: ${name}
+Phone: ${phone}`;
+
             const whatsappURL = `https://wa.me/923111082474?text=${encodeURIComponent(message)}`;
             window.open(whatsappURL, '_blank');
+
+            // ✅ Clear form fields
+            form.reset();
+
+            // ✅ Close modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+            if (modal) {
+              modal.hide();
+            }
           });
         }
       }, 200);
