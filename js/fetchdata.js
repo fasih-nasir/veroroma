@@ -181,7 +181,6 @@ if(location.pathname === "/categories.html" && product__filte_of_car_page){
 
 
 
-
 var location_of_page = window.location.href.split("=");
 var single_prdocut_detail_heef = document.getElementById("single_prdocut_detail_heef");
 
@@ -219,7 +218,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <button type="button" class="bg-white shadow-lg border-0 px-3 rounded-2 p-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Buy Now
             </button>
-            <button class="border-dark border-1 shadow-lg px-3 rounded-2 p-2">Add To Cart</button>
+            <button id="addToCartBtn" class="border-dark border-1 shadow-lg px-3 rounded-2 p-2">Add To Cart</button>
           </div>
         </div>
 
@@ -253,7 +252,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       `;
 
-      // Attach WhatsApp redirect on form submit
+      // ✅ WhatsApp Order Form Submit
       setTimeout(() => {
         const form = document.getElementById("orderForm");
         if (form) {
@@ -277,10 +276,7 @@ Phone: ${phone}`;
             const whatsappURL = `https://wa.me/923111082474?text=${encodeURIComponent(message)}`;
             window.open(whatsappURL, '_blank');
 
-            // ✅ Clear form fields
             form.reset();
-
-            // ✅ Close modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
             if (modal) {
               modal.hide();
@@ -289,8 +285,74 @@ Phone: ${phone}`;
         }
       }, 200);
 
+      // ✅ Add to Cart Button Logic
+      setTimeout(() => {
+        const addToCartBtn = document.getElementById("addToCartBtn");
+        if (addToCartBtn) {
+          addToCartBtn.addEventListener("click", () => {
+            const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+            // Check if item already exists (optional logic)
+            const exists = cart.find(item => item.id === productId);
+            if (exists) {
+              alert("This product is already in your cart.");
+              return;
+            }
+
+            // Add new product to cart
+            cart.push({
+              id: productId,
+              name: product.name,
+              price: product.price,
+              image: product.image1,
+              quantity: 1,
+              category: product.category
+            });
+
+            localStorage.setItem("cartItems", JSON.stringify(cart));
+            alert("Product added to cart successfully ✅");
+          });
+        }
+      }, 200);
+
     } else {
-      console.log("❌ No such document!");
+      // console.log("❌ No such document!");
     }
   }
 });
+
+
+// ============================================ CODE FOR CARD CANVAS =============================
+var offcanvasRightcardLabel=document.getElementById("offcanvasRightcardLabel");
+if(offcanvasRightcardLabel){
+  
+  var get_value_cart=JSON.parse(localStorage.getItem("cartItems"))
+  if(get_value_cart){
+    
+    var span_length=document.getElementById("span_length");
+    span_length.innerHTML=get_value_cart.length
+    offcanvasRightcardLabel.innerHTML=`
+    <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightcardLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+    ...
+    </div>
+    `
+  }
+  else{
+  console.log("Ss");
+   offcanvasRightcardLabel.innerHTML=`
+    <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightcardLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+  ADD TO CART FIRST
+  </div>
+  `
+}
+}
+// ============================================ CODE FOR CARD CANVAS ==================================
+
