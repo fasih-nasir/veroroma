@@ -197,6 +197,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (prodcSnapshot.exists()) {
       const product = prodcSnapshot.data();
+console.log(product.description.split("<newline>")[0]);
 
       single_prdocut_detail_heef.innerHTML = `
         <div class="col-lg-6">
@@ -209,11 +210,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div>
             <h2 class="mb-2">${product.name}</h2>
             <h5 class="mb-2">Rs ${product.price}</h5>
-            <p class="mb-2">${product.description}</p>
-            <p class="lh-sm">Available in stock: ${product.quantity}</p>
-            <p class="lh-sm">Category: ${product.category}</p>
+            <p class="mb-2 fs_5 fw-normal py-3">${product.description.split("<newline>")[0]}</p>
+            <p class="lh-sm fs_5"><strong>Available in stock :</strong>  ${product.quantity}</p>
+            <p class="lh-sm fs_5"><strong>Category: </strong>${product.category}</p>
           </div>
-
+<div class="col-3 my-3 p-0 ">
+<input class="form-control" placeholder="Quantity" type="number" id="pro_quantity"/>
+</div>
           <div class="d-flex flex-lg-row flex-column gap-3 align-items-center">
             <button type="button" class="bg-white shadow-lg border-0 px-3 rounded-2 p-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Buy Now
@@ -288,6 +291,7 @@ Phone: ${phone}`;
       // ✅ Add to Cart Button Logic
       setTimeout(() => {
         const addToCartBtn = document.getElementById("addToCartBtn");
+
         if (addToCartBtn) {
           addToCartBtn.addEventListener("click", () => {
             const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -305,12 +309,13 @@ Phone: ${phone}`;
               name: product.name,
               price: product.price,
               image: product.image1,
-              quantity: 1,
+              quantity: document.getElementById("pro_quantity").value,
               category: product.category
             });
 
             localStorage.setItem("cartItems", JSON.stringify(cart));
             alert("Product added to cart successfully ✅");
+            document.getElementById("pro_quantity").value=""
           });
         }
       }, 200);

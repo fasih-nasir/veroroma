@@ -47,3 +47,17 @@ if (header) {
  
     })
     }
+
+// =============================================================
+    var footer=document.getElementById("footer");
+    if(footer){
+      
+      fetch("../footer.html")
+      .then((e)=>e.text())
+      .then((reds)=>{
+        footer.innerHTML=reds
+      })
+    }
+
+// =============================================================
+
